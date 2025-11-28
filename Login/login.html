@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+        :root {
+            --branco: #ffffff;
+            --cinza-fundo: #f1f5f9;
+            --cinza-borda: #ddd;
+            --roxo-botao: #730099;
+            --roxo-hover: #4d0066;
+        }
+
+        body,
+        input,
+        button {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--cinza-fundo);
+            margin: 0;
+            padding: 0;
+        }
+
+        .principal {
+            padding: auto;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: var(--branco);
+            border-radius: 14px;
+            width: 350px;
+            padding: 30px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .campo input {
+            box-sizing: border-box;
+            padding: 12px 15px;
+            border: 1px solid var(--cinza-borda);
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .campo input:focus {
+            outline: none;
+            border: 1px solid var(--roxo-botao);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+        }
+
+        .senha-olho {
+            position: relative;
+        }
+
+        span i {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .btn-enviar {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: none;
+            width: 100%;
+            background-color: var(--roxo-botao);
+            color: var(--branco);
+        }
+
+        .btn-enviar:hover {
+            background-color: #4c1183;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="principal">
+        <form class="container" id="formLogin">
+            <h1>Login</h1>
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" class="email" placeholder="Digite seu e-mail">
+            </div>
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <div class="senha-olho">
+                    <input type="password" id="senha" class="senha" placeholder="Digite sua senha">
+                    <span id="iconOlho"><i class="fa-solid fa-eye"></i></span>
+                </div>
+            </div>
+            <p style="text-align: right; margin-top: 8px;">
+                <a href="#" style="font-size: 14px; color: #39004d; text-decoration: none;">
+                    Esqueci minha senha
+                </a>
+            </p>
+            <div id="msgErro"></div>
+            <button class="btn-enviar">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("formLogin").addEventListener("submit", function (e) {
+            const email = document.getElementById("email").value.trim();
+            const senha = document.getElementById("senha").value.trim();
+            const msgErro = document.getElementById("msgErro");
+
+            msgErro.textContent = "";
+
+            if (email === "" || senha === "") {
+                e.preventDefault();
+                msgErro.textContent = "Preencha todos os campos."
+                return;
+            }
+        })
+
+        document.getElementById("iconOlho").addEventListener("click", function (e) {
+            const input = document.getElementById("senha");
+
+            /*SE O TIPO DO CAMPO FOR SENHA MUDA PARA TEXTO, SE FOR TEXTO MUDA PARA SENHA*/
+            if(input.type === "password") {
+                input.type = "text";
+                this.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+            } else {
+                input.type = "password"
+                this.innerHTML = '<i class="fa-solid fa-eye"></i>';
+            }
+        })
+    </script>
+</body>
+
+</html>
